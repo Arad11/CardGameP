@@ -38,4 +38,4 @@ if cplayer > 5:
 elif cplayer < 5:
 #     print(f'{c.player2.name} is the winner')
 # else:
-#     print("even")
+#     print("even") srtht

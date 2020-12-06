@@ -1,5 +1,5 @@
 import random
-from OurProject.Card import Card
+import Card
 
 
 class Deckofcards:
@@ -12,7 +12,7 @@ class Deckofcards:
             self.package.append({i: 'club'})
 
     def __str__(self):
-        return f"the package is {self.package}"
+        return f"the package is {self.package} id"
 
     def show(self):
         return f"the package is {self.package}"

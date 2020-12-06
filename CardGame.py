@@ -1,6 +1,6 @@
-from OurProject.Deckofcards import Deckofcards
-from OurProject.Card import Card
-from OurProject.Player import Player
+from Deckofcards import Deckofcards
+from Card import Card
+from Player import Player
 import random
 
 class CardGame:
@@ -23,7 +23,7 @@ class CardGame:
         """
         פעולה שמאתחלת משחק חדש
         """
-        if self.was_new_game_called == False:
+        if not self.was_new_game_called:
             deck = Deckofcards().shuffle_the_pack()
             self.deck = deck
             self.player1.set_hand(self.deck, cardsnum)
@@ -36,8 +36,8 @@ class CardGame:
         פעולה שבודקת למי יש חבילה גדולה יותר והוא יהיה המנצח
         """
         if len(self.player1.pack) > len(self.player2.pack):
-            return f"the winner is {self.player1.name}"
+            return self.player1.name
         elif len(self.player1.pack) < len(self.player2.pack):
-            return f"the winner is {self.player2.name}"
+            return self.player2.name
         else:
             return None

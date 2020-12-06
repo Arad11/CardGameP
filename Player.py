@@ -1,5 +1,5 @@
-from OurProject.Deckofcards import Deckofcards
-from OurProject.Card import Card
+from Deckofcards import Deckofcards
+from Card import Card
 import random
 
 
@@ -18,17 +18,15 @@ class Player:
         """
         פעולה שמחלקת לשחקן חבילת קלפים חדשה
         """
-        """
-        לא עובד
-        if type(deck) is not list:
+        if not isinstance(deck,list):
             print("invalid number. insert list")
             return None
-        else:
-            for i in range(len(deck)):
-                if type(deck[i]) is not Card:
-                    print("in the package the values must be cards1")
-                    return None
-             """
+        # else:
+        #     for i in range(len(deck)):
+        #         if not type(deck[i]) is not Card:
+        #             print("in the package the values must be cards1")
+        #             return None
+
         if type(cardsnum) is not int:
             print("invalid value. insert number")
             return None

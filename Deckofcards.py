@@ -1,6 +1,5 @@
 import random
-import Card
-
+from Card import Card
 
 class Deckofcards:
     def __init__(self, sum_cards=13):
@@ -22,5 +21,8 @@ class Deckofcards:
         return self.package
 
     def deal_one(self):
-        rand_num = random.randint(0, len(self.package) - 1)
-        return self.package.pop(rand_num)
+        if len(self.package)>1:
+            rand_num = random.randint(0, len(self.package) - 1)
+            return self.package.pop(rand_num)
+        else:
+            return self.package.pop()

@@ -1,6 +1,6 @@
 from unittest import TestCase
-from OurProject.Player import Player
-from OurProject.Deckofcards import Deckofcards
+from Player import Player
+from Deckofcards import Deckofcards
 
 class TestPlayer(TestCase):
     def setUp(self):

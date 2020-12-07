@@ -1,32 +1,49 @@
 from unittest import TestCase
 from Player import Player
-from Deckofcards import Deckofcards
+from Card import Card
+from CardGame import CardGame
+
 
 class TestPlayer(TestCase):
     def setUp(self):
         print("setUp")
         self.p1 = Player('arad')
+        self.c = CardGame('arad', 'nitzan')
 
     def tearDown(self):
         print("tearDown")
 
     def test_show(self):
-        self.assertIn(self.p1.show(),  f'{self.p1.name} have the package {self.p1.pack}')
+        # מדפיס יפה את הערכים
+        self.assertIn(self.p1.show(), f'{self.p1.name} have the package {self.p1.pack}')
 
     def test_set_hand(self):
-        self.assertIsNone(self.p1.set_hand(self.p1.pack, 0))
-        self.assertIsNone(self.p1.set_hand(self.p1.pack, 53))
-        self.assertIsNone(self.p1.set_hand((1,3), 4))
-        self.assertIsNone(self.p1.set_hand([3,4,5], 'ty'))
-        # מחזיר שגיאה אבל שיחזיר שגיאה גם בגלל שהכנסתי רשימה לא של קלפים
-        self.assertIsNone(self.p1.set_hand([1,56,6], 6))
-        # למה אני לא מקבל חבילה?
-        deck = Deckofcards()
-        self.assertIs(self.p1.set_hand(deck,10), self.p1.pack)
-
+        # בודק ערך מחוץ לתחום
+        with self.assertRaises(IndexError):
+            self.p1.set_hand(0, self.p1.pack)
+        with self.assertRaises(IndexError):
+            self.p1.set_hand(53, self.p1.pack)
+        # מקבל ערך שהוא לא מספר עבור מספר קלפים
+        with self.assertRaises(TypeError):
+            self.p1.set_hand((1, 3), self.p1.pack)
+        with self.assertRaises(TypeError):
+            self.p1.set_hand('ty', [3, 4, 5])
+        # לא מקבל רשימה בתור חבילת קלפים
+        with self.assertRaises(TypeError):
+            self.p1.set_hand(6, 2)
 
     def test_get_random_card(self):
-        pass
+        # בודק האם אני מקבל ערך מסוג קלף
+        self.assertIsInstance(self.c.player2.get_random_card(), Card)
+        # האם אפשר למשוך קלף מחבילה ריקה
+        with self.assertRaises(IndexError):
+            self.p1.pack.clear()
+            self.p1.get_random_card()
 
     def test_add_card(self):
-        pass
+        # בודק מה קורה אם לא הכנסנו ערך לפעולה בכלל
+        with self.assertRaises(ValueError):
+            self.p1.add_card()
+        # בודק מה קורה אם הכנסנו ערך לא נכון לפעולה
+        with self.assertRaises(TypeError):
+            self.p1.add_card(2, 3)

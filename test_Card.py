@@ -1,5 +1,6 @@
 from unittest import TestCase
-from OurProject.Card import Card
+from Card import Card
+
 
 class TestCard(TestCase):
     def setUp(self):
@@ -22,16 +23,61 @@ class TestCard(TestCase):
         """
         בודק האם אני מקבל None כשאני לא מכניס כלום לפונקציה
         """
-        self.assertIsNone(self.c1.war())
+        with self.assertRaises(ValueError):
+            self.c3.war()
         """ 
-        גם משווה בין קלפים זהים 
+        גם משווה בין קלפים עם ערכים זהים 
         גם משתמש בערכי קצה
         ומחזיר לי את הקלף המנצח פעם אחת כשהוא זה שמפעיל את הפעולה ופעם אחת כשהוא מופעל בתוך הפעולה
         """
-        self.assertTrue(self.c1.war(self.c2, self.c3, self.c4), self.c3)
-        self.assertTrue(self.c3.war(self.c1, self.c2, self.c4), self.c3)
+        self.assertEqual(self.c1.war(self.c2, self.c3, self.c4), self.c4)
+        self.assertEqual(self.c4.war(self.c1, self.c2, self.c3), self.c4)
+       # """ הזנה של משתנים שונים שאינם קלפים"""
+        with self.assertRaises(ValueError):
+            self.c3.war(4)
+        with self.assertRaises(ValueError):
+            self.c3.war({4: 'ga'})
+        with self.assertRaises(ValueError):
+            self.c3.war(('ah',4))
+        with self.assertRaises(ValueError):
+            self.c3.war('ah')
+
+    def test__init__(self):
         """
-        צריך לעשות בדיקה של הזנה של משתנים שונים שאינם קלפים
+        בודק האם ניתן להגדיר קלף לא בתחום או אם סוג לא קיים
         """
-        # self.assertIsNone(self.c1.war(9,62,7,2,5))
-        # self.assertIsNone(self.c1.war('af', 'ga', [14,5,4], ('g'), {1:'ga'}))
+        with self.assertRaises(ValueError):
+            card10 = Card(14, 'heart')
+        with self.assertRaises(KeyError):
+            card10 = Card(6, 'sh')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

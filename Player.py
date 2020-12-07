@@ -1,4 +1,3 @@
-from Deckofcards import Deckofcards
 from Card import Card
 import random
 
@@ -14,25 +13,21 @@ class Player:
     def show(self):
         return f'{self.name} have the package {self.pack}'
 
-    def set_hand(self, deck, cardsnum):
+    def set_hand(self, cardsnum, deck):
         """
         פעולה שמחלקת לשחקן חבילת קלפים חדשה
         """
-        if not isinstance(deck,list):
-            print("invalid number. insert list")
-            return None
-        # else:
-        #     for i in range(len(deck)):
-        #         if not type(deck[i]) is not Card:
-        #             print("in the package the values must be cards1")
-        #             return None
+        if not isinstance(deck, list):
+            raise TypeError("invalid number. insert list")
+        else:
+            for i in deck:
+                if type(i) != Card:
+                    raise TypeError("you can only insert Cards to the deck!")
 
         if type(cardsnum) is not int:
-            print("invalid value. insert number")
-            return None
+            raise TypeError("invalid value. insert number")
         if cardsnum < 1 or cardsnum > len(deck):
-            print("invalid number. insert number between 1 and package length")
-            return None
+            raise IndexError("invalid number. insert number between 1 and package length")
         for i in range(0, cardsnum):
             self.pack.append(deck.pop(i))
         return self.pack
@@ -42,17 +37,20 @@ class Player:
         פעולה שבוחרת קלף מחבילה של השחקן מוציאה אותו בלי להחזיק לחבילה
         """
         packlen = len(self.pack)
-        if packlen == 1:
-            return self.pack.pop()
-        else:
+        if packlen > 1:
             randnum = random.randint(0, packlen - 1)
             return self.pack.pop(randnum)
+        elif packlen == 1:
+            return self.pack.pop()
+        else:
+            raise IndexError("invalid range! there aren't cards in the package")
 
-    def add_card(self, newcard):
+    def add_card(self, newcard='nothing added'):
         """
         פעולה שמוסיפה קלף לחבילה של שחקן מסוים
         """
-        kind = {1: 'diamond', 2: 'spade', 3: 'heart', 4: 'club'}
-        c ={newcard.value: kind[newcard.suit]}
-        self.pack.append(c)
-        return self.pack
+        if newcard == 'nothing added':
+            raise ValueError("invalid value. Must insert a new Card!")
+        if type(newcard) is not Card:
+            raise TypeError("invalid value. Must insert Card!")
+        return self.pack.append(newcard)

@@ -13,10 +13,11 @@ class Player:
     def show(self):
         return f'{self.name} have the package {self.pack}'
 
+
+    def set_hand(self, cardsnum, deck):
         """
         פעולה שמחלקת לשחקן חבילת קלפים חדשה
         """
-    def set_hand(self, cardsnum, deck):
         if not isinstance(deck, list):
             raise TypeError("invalid number. insert list")
         else:

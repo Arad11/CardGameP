@@ -31,6 +31,8 @@ class TestPlayer(TestCase):
         # לא מקבל רשימה בתור חבילת קלפים
         with self.assertRaises(TypeError):
             self.p1.set_hand(6, 2)
+        self.assertTrue(self.p1.set_hand(10, self.c.deck))
+        self.assertTrue(self.p1.set_hand(5, self.c.deck))
 
         self.assertTrue(self.c.player1.set_hand(4, self.c.deck))
 
@@ -53,6 +55,10 @@ class TestPlayer(TestCase):
         # בודק מה קורה אם הכנסנו ערך לא נכון לפעולה
         with self.assertRaises(TypeError):
             self.p1.add_card(2)
+        with self.assertRaises(TypeError):
+            self.p1.add_card('ge')
+        with self.assertRaises(TypeError):
+            self.p1.add_card((2, 4))
         c1 = Card(4, 'club')
         self.p1.add_card(c1)
         self.assertIn(c1, self.p1.pack)

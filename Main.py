@@ -20,3 +20,5 @@ for i in range(1, 10):
     else:
         print("The round does'nt count! \n must insert valid value!")
 print(f'the winner of the whole game is {c.get_winner()}')
+
+

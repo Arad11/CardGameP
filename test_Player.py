@@ -32,6 +32,9 @@ class TestPlayer(TestCase):
         with self.assertRaises(TypeError):
             self.p1.set_hand(6, 2)
 
+        self.assertTrue(self.c.player1.set_hand(4, self.c.deck))
+
+
     def test_get_random_card(self):
         # בודק האם אני מקבל ערך מסוג קלף
         self.assertIsInstance(self.c.player2.get_random_card(), Card)

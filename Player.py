@@ -13,10 +13,10 @@ class Player:
     def show(self):
         return f'{self.name} have the package {self.pack}'
 
-    def set_hand(self, cardsnum, deck):
         """
         פעולה שמחלקת לשחקן חבילת קלפים חדשה
         """
+    def set_hand(self, cardsnum, deck):
         if not isinstance(deck, list):
             raise TypeError("invalid number. insert list")
         else:
@@ -47,8 +47,7 @@ class Player:
 
     def add_card(self, newcard='nothing added'):
         """
-        פעולה שמוסיפה קלף לחבילה של שחקן מסוים
-        """
+        פעולה שמוסיפה קלף לחבילה של שחקן מסוים"""
         if newcard == 'nothing added':
             raise ValueError("invalid value. Must insert a new Card!")
         if type(newcard) is not Card:

@@ -39,6 +39,9 @@ class TestPlayer(TestCase):
         with self.assertRaises(IndexError):
             self.p1.pack.clear()
             self.p1.get_random_card()
+        c = CardGame('arad', 'nitzan', 1)
+        t = c.player1.pack.copy()
+        self.assertEqual(c.player1.get_random_card(), t[0])
 
     def test_add_card(self):
         # בודק מה קורה אם לא הכנסנו ערך לפעולה בכלל
@@ -46,4 +49,7 @@ class TestPlayer(TestCase):
             self.p1.add_card()
         # בודק מה קורה אם הכנסנו ערך לא נכון לפעולה
         with self.assertRaises(TypeError):
-            self.p1.add_card(2, 3)
+            self.p1.add_card(2)
+        c1 = Card(4, 'club')
+        self.p1.add_card(c1)
+        self.assertIn(c1, self.p1.pack)

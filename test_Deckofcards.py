@@ -30,12 +30,12 @@ class TestDeckofcards(TestCase):
         with self.assertRaises(IndexError):
             deck1.deal_one()
         #בודק מה קורה כשאורך החבילה הוא אחד
-        deck1 = Deckofcards(1)
+        deck1 = Deckofcards(2)
         for i in range(3):
             deck1.deal_one()
-        t = self.deck
-        self.assertIsInstance(self.deck.deal_one(), t[0])
-        # self.assertTrue(len(self.deck), 0)
+        t = deck1.package.copy()
+        self.assertEqual(deck1.deal_one(), t[0])
+        self.assertEqual(len(deck1.package), 0)
 
     def test_show(self):
         self.assertIn(self.deck.show(), f"the package is {self.deck.package}")

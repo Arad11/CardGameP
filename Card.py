@@ -21,7 +21,6 @@ class Card:
         except:
             raise KeyError("invalid value! must insert int right value! \n diamond / spade / heart / club")
 
-
     def show(self):
         """
         הפעולה תחזיר יפה תאור של הקלף

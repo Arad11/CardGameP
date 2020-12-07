@@ -50,34 +50,3 @@ class TestCard(TestCase):
             card10 = Card(14, 'heart')
         with self.assertRaises(KeyError):
             card10 = Card(6, 'sh')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

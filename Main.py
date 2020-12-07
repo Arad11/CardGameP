@@ -1,5 +1,5 @@
 from CardGame import CardGame
-
+from Card import Card
 
 
 c = CardGame("Nitzan", "Arad")

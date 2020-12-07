@@ -11,6 +11,9 @@ class TestDeckofcards(TestCase):
     def tearDown(self):
         print("tearDown")
 
+    def test__str__(self):
+        self.assertIn(self.deck.__str__(), f"the package is {self.deck.package}")
+
     def test_shuffle_the_pack(self):
         self.assertIs(self.deck.shuffle_the_pack(), self.deck.package)
 
@@ -26,6 +29,13 @@ class TestDeckofcards(TestCase):
         deck1.package.clear()
         with self.assertRaises(IndexError):
             deck1.deal_one()
+        #בודק מה קורה כשאורך החבילה הוא אחד
+        deck1 = Deckofcards(1)
+        for i in range(3):
+            deck1.deal_one()
+        t = self.deck
+        self.assertIsInstance(self.deck.deal_one(), t[0])
+        # self.assertTrue(len(self.deck), 0)
 
     def test_show(self):
         self.assertIn(self.deck.show(), f"the package is {self.deck.package}")

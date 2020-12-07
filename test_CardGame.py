@@ -10,6 +10,9 @@ class TestCardGame(TestCase):
     def tearDown(self):
         print("tearDown")
 
+    def test__str__(self):
+        self.assertIn(self.c1.__str__(), f'player1 {self.c1.player1} \n player2 {self.c1.player2}')
+
     def test_new_game(self):
         self.assertIn(self.c1.new_game(), "you can not start a new game while the last one is still going")
         with self.assertRaises(ValueError):
